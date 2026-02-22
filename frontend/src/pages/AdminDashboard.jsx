@@ -48,22 +48,22 @@ export default function AdminDashboard() {
     };
 
     const fetchStudents = async () => {
-        const res = await fetch('/api/admin/students', { headers });
+        const res = await fetch('https://tuition-tracker-cjnv.onrender.com/api/admin/students', { headers });
         if (res.ok) setStudents(await res.json());
     };
 
     const fetchHomeworks = async () => {
-        const res = await fetch('/api/admin/homework', { headers });
+        const res = await fetch('https://tuition-tracker-cjnv.onrender.com/api/admin/homework', { headers });
         if (res.ok) setHomeworks(await res.json());
     };
 
     const fetchSubmissionsForStudent = async (studentId) => {
-        const res = await fetch(`/api/admin/students/${studentId}/submissions`, { headers });
+        const res = await fetch(`https://tuition-tracker-cjnv.onrender.com/api/admin/students/${studentId}/submissions`, { headers });
         if (res.ok) setSubmissions(await res.json());
     };
 
     const fetchAttendance = async (dateStr) => {
-        const res = await fetch(`/api/admin/attendance?date=${dateStr}`, { headers });
+        const res = await fetch(`https://tuition-tracker-cjnv.onrender.com/api/admin/attendance?date=${dateStr}`, { headers });
         if (res.ok) {
             const records = await res.json();
             const attObj = {};
@@ -76,7 +76,7 @@ export default function AdminDashboard() {
 
     const handleCreateStudent = async (e) => {
         e.preventDefault();
-        const res = await fetch('/api/admin/students', {
+        const res = await fetch('https://tuition-tracker-cjnv.onrender.com/api/admin/students', {
             method: 'POST',
             headers,
             body: JSON.stringify(newStudent)
@@ -95,7 +95,7 @@ export default function AdminDashboard() {
             return;
         }
 
-        const res = await fetch(`/api/admin/students/${studentId}`, {
+        const res = await fetch(`https://tuition-tracker-cjnv.onrender.com/api/admin/students/${studentId}`, {
             method: 'DELETE',
             headers
         });
@@ -113,7 +113,7 @@ export default function AdminDashboard() {
 
     const handleCreateHomework = async (e) => {
         e.preventDefault();
-        const res = await fetch('/api/admin/homework', {
+        const res = await fetch('https://tuition-tracker-cjnv.onrender.com/api/admin/homework', {
             method: 'POST',
             headers,
             body: JSON.stringify(newHomework)
@@ -129,7 +129,7 @@ export default function AdminDashboard() {
 
     const handleGrade = async (e) => {
         e.preventDefault();
-        const res = await fetch(`/api/admin/submissions/${grading.submissionId}`, {
+        const res = await fetch(`https://tuition-tracker-cjnv.onrender.com/api/admin/submissions/${grading.submissionId}`, {
             method: 'PUT',
             headers,
             body: JSON.stringify({ status: grading.status, remark: grading.remark })
@@ -149,7 +149,7 @@ export default function AdminDashboard() {
             status: attendanceData[studentId]
         }));
 
-        const res = await fetch('/api/admin/attendance', {
+        const res = await fetch('https://tuition-tracker-cjnv.onrender.com/api/admin/attendance', {
             method: 'POST',
             headers,
             body: JSON.stringify({ date: attendanceDate, attendanceRecords: recordsToSave })

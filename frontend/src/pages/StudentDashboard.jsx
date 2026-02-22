@@ -15,7 +15,7 @@ export default function StudentDashboard() {
             }
 
             try {
-                const res = await fetch('/api/student/dashboard', {
+                const res = await fetch('https://tuition-tracker-cjnv.onrender.com/api/student/dashboard', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
 
