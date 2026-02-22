@@ -15,7 +15,7 @@ export default function StudentDashboard() {
             }
 
             try {
-                const res = await fetch('http://localhost:5000/api/student/dashboard', {
+                const res = await fetch('/api/student/dashboard', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
 
