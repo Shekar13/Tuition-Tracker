@@ -11,29 +11,21 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+// ✅ CORS (important)
+app.use(cors({
+  origin: "*"
+}));
 
-import path from 'path';
+app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/student', studentRoutes);
 
-const __dirname = path.resolve();
-
-// Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
-  });
-}
-
 const PORT = process.env.PORT || 5000;
 
+// DB + Server start
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
